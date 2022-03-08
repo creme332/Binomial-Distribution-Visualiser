@@ -3,21 +3,19 @@
 
 `X ~ B(n,p)` is drawn for any valid parameters `n`, `p`
 
+# Function call # 
+
+```cpp
+BinomialVisualiser(10,0.6)
+```
+
 # Future work #
 - [ ] Get rid of awkward scale
-- [ ] Add colors
-- [ ] Deal with large values of n 
+- [ ] Color the graph
+- [ ] Deal with large values of n (Do not plot all values of x)
 - [ ] output E(X), Var(X), mode
 
 # Inspiration #
 https://homepage.divms.uiowa.edu/~mbognar/applets/bin.html
 
 https://shiny.rit.albany.edu/stat/binomial/
-
-# About #
-The shape of a binomial distribution is symmetrical when p=0.5 or when n is large.
-# Function call # 
-
-```cpp
-BinomialVisualiser(10,0.6)
-```
