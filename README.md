@@ -1,13 +1,13 @@
 # Binomial Distribution Visualiser
-![image](https://user-images.githubusercontent.com/65414576/156934633-601ec42f-bec1-431a-97cb-f38d8c7b29d0.png)
+![image](https://user-images.githubusercontent.com/65414576/157201067-5c2ab688-e7a2-4ff1-8a6a-9d2fab77ae9d.png)
 
 `X ~ B(n,p)` is drawn for any valid parameters `n`, `p`
 
 # Future work #
-- [ ] adaptive scale
-- [ ] colors
+- [ ] Get rid of awkward scale
+- [ ] Add colors
+- [ ] Deal with large values of n 
 - [ ] output E(X), Var(X), mode
-- [ ] Optimise : Use symmetry when p=0.5 and calculate only first half of probabilities
 
 # Inspiration #
 https://homepage.divms.uiowa.edu/~mbognar/applets/bin.html
