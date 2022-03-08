@@ -11,6 +11,7 @@ BinomialVisualiser(10,0.6)
 
 # Future work #
 - [ ] Get rid of awkward scale
+- [ ] Do not hard code FilledBlock, EmptyBlock
 - [ ] Color the graph
 - [ ] Deal with large values of n (Do not plot all values of x)
 - [ ] output E(X), Var(X), mode
