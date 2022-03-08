@@ -2,60 +2,67 @@
 #include <vector>
 #include <string>
 #include <cmath>
-#define ll long long
 
 using namespace std;
 
-double P_x(int n, double p, int x) {
+long double P_x(const int n, const long double p, const int x) {
 	//returns P(X=x) = nCx (p)^x (1-p)^(1-x)
 	if (x == 0)return pow(1 - p, n);
-
-	if (x > n - x) x = n - x; 
-	int nCx = 1;
-	for (int i = 1; i <= x; i++) {
-		nCx *= n - x + i;
+	int k=x;
+	if (x > n - x) k = n - x; 
+	long long nCx = 1;
+	for (long long i = 1; i <= k; i++) {
+		nCx *= n - k + i;
 		nCx /= i;
 	}
 
-	return double(nCx) * pow(p,x) * pow(1-p,n-x);
+	return long double(nCx) * pow(p,x) * pow(1-p,n-x);
 }
-void BinomialVisualiser(int n, double p) {//n>0, p>0
-	const string Unit = "@";
+void ProbabilityTable(int n, long double p) {
+	cout << "x\t P(X=x)\n";
+	for (int x = 0;x <= n;x++) {
+		string line = to_string(x) + "\t"; //line to be output
+		double px = P_x(n, p, x); //P(X = x)
+		line += to_string(px);
+		cout << line << "\n";
+	}
+}
+void BinomialVisualiser(const int n, const long double p) {//n>0, p>0
+	const int TotalBlocks = 10; //number of blocks that can be displayed horizontally
+	const int Subdivisions = 8; // number of subdivisions in each block
+	const string Unit = "@"; // a block consists of either a unit or an empty unit
 	const string EmptyUnit = ".";
 	const string FilledBlock = "@@@@@@@|";
 	const string EmptyBlock  = ".......|";
-	const string Scale = "\n\t0.0\t0.1\t0.2\t0.3\t0.4\t0.5\t0.6\t0.7\t0.8\t0.9\t1.0\n\n"; 	//scale of probabilities
-	const int TotalBlocks = 10; //size of grid in terms of blocks
 
-	int TotalFilledBlocks; //Number of filled block = first decimal place of px if 0<px<1
-	int TotalEmptyBlocks; //Number of filled block = first decimal place of px if 0<px<1
+	int TotalFilledBlocks; //Number of filled block for each row
+	int TotalEmptyBlocks; //Number of filled block for each row
 
-	int mode = p*(n+1);
-	/*
-		 p(n + 1) - 1 <= mode <= p(n + 1)
-		 There is equality when $p(n + 1)$ is an integer -> 2 modes 
-		- Binomial distribution has 1 or 2 modal values only.
-	*/
+	//Choose a scale using multiples or sub-multiples of 1, 2, 5
+	string Scale = "\n"; 	//scale of probabilities
+	int mode = int(p * long double(n + 1));
+	long double MaxProbability = P_x(n, p, mode); 
+	const long double BigGap = (MaxProbability / long double(TotalBlocks)); //gap size between blocks
+	const long double SmallGap = BigGap / Subdivisions; // gap size between subdivisions
+	for (long double i = 0;i < 11;i++) {
+		Scale += "\t" + to_string(BigGap * i).substr(0,5);
+	}
+	Scale += "\n\n";
 
-	//Choose an appropriate scale
-	//double GreatestProbability = P_x(n, p, mode);
-	//const double BigInterval = GreatestProbability / 10;
-	//const double SmallInterval = BigInterval / 8;
-	cout << "\t\t\t X ¬ B (" << n << ", " << p << ")\n";
+	cout << "\t\t\t\t\t X ~ B (" << n << ", " << p << ")\n"; //header
 	cout << Scale;
 
-	//can be optimised. No need to calculate both P_1 and P_{n-1}
 	for (int x = 0;x <= n;x++) {
 		string line = "x = " + to_string(x) + "\t |"; //line to be output
-		double px = P_x(n, p, x); //P(X=x)
-
-		TotalFilledBlocks = int(px*10);
+		long double px = P_x(n, p, x); //P(X = x)
+		
 		//add filled blocks
+		TotalFilledBlocks = int(px/BigGap);
 		for (int i = 0;i < TotalFilledBlocks;i++) {line += FilledBlock;}
 
 		//remaining units 
-		double remaining = px - double(TotalFilledBlocks) / double(10);
-		int units = int(remaining * 8);
+		long double remaining = px - long double(TotalFilledBlocks)*BigGap;
+		int units = int(remaining/SmallGap);
 		if (units == 0) {
 			TotalEmptyBlocks = TotalBlocks - TotalFilledBlocks;
 		}
@@ -72,13 +79,17 @@ void BinomialVisualiser(int n, double p) {//n>0, p>0
 		for (int i = 0;i < TotalEmptyBlocks;i++) { line += EmptyBlock;}
 		cout << line << "\n\n";
 	}
+	ProbabilityTable(n, p);
 
 	//add E(x), mode, Variance
 }
 int main() {
+	//improve to support standard notation
 	//cout << P_x(10, 0.4, 0)<<"\n";
-	BinomialVisualiser(5, 0.5);
+	//cout << RoundUp(0.01);
 
+	BinomialVisualiser(10, 0.5);
+	system("pause");
 
 
 	////smallest interval = 0.125
@@ -92,6 +103,6 @@ int main() {
 	cout << "x = 6\t |@@@@@@@|@@@@@@@|@@@@@@@|@@@@@@@|.......|.......|.......|.......|.......|.......|\n\n";
 	cout << "x = 7\t |@@@@@@@|@@@@@@@|@@@@...|.......|.......|.......|.......|.......|.......|.......|\n\n";
 	cout << "x = 8\t |@@@@@@@|.......|.......|.......|.......|.......|.......|.......|.......|.......|\n\n";
-
 	system("pause");
+
 }
