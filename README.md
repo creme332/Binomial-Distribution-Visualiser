@@ -26,9 +26,9 @@ TotalBlocks * Subdivisions < 100
 
 # Future work #
 - [ ] Get rid of awkward scale (Choose only sensible scales which are multiples of 2, 5)
-- [ ] Do not hard code FilledBlock, EmptyBlock
+- [x] Do not hard code FilledBlock, EmptyBlock
 - [ ] Color the graph
-- [ ] Deal with large values of n (Do not plot all values of x)
+- [x] Deal with large values of n (Do not plot all values of x)
 - [ ] output E(X), Var(X), mode
 
 # Inspiration #
