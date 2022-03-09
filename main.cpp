@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#define ll long long
 
 using namespace std;
 
@@ -10,13 +11,17 @@ long double P_x(const int n, const long double p, const int x) {
 	if (x == 0)return pow(1 - p, n);
 	int k=x;
 	if (x > n - x) k = n - x; 
-	long long nCx = 1;
-	for (long long i = 1; i <= k; i++) {
+	long double  nCx = 1;
+	bool multiplied = 0;
+	for (long double i = 1; i <= k; i++) {
 		nCx *= n - k + i;
 		nCx /= i;
+		if (nCx > 99999999) { nCx *= pow(p, x) * pow(1 - p, n - x);multiplied = 1; }
 	}
-
-	return long double(nCx) * pow(p,x) * pow(1-p,n-x);
+	if (multiplied == 1) {
+		return nCx;
+	}
+	return nCx * pow(p, x) * pow(1 - p, n - x);
 }
 void ProbabilityTable(int n, long double p) {
 	cout << "x\t P(X=x)\n";
@@ -28,30 +33,49 @@ void ProbabilityTable(int n, long double p) {
 	}
 }
 void BinomialVisualiser(const int n, const long double p) {//n>0, p>0
-	const int TotalBlocks = 10; //number of blocks that can be displayed horizontally
-	const int Subdivisions = 8; // number of subdivisions in each block
+	const int TotalBlocks = 10; //number of blocks that can be displayed horizontally. Keep < 25.
+	const int Subdivisions = 8; // number of smaller interval within each block. Do not change. keep > 1
 	const string Unit = "@"; // a block consists of either a unit or an empty unit
 	const string EmptyUnit = ".";
-	const string FilledBlock = "@@@@@@@|";
-	const string EmptyBlock  = ".......|";
+	
+	//create FilledBlock
+	string temp = "";
+	for (int i = 1;i < Subdivisions;i++) {temp += Unit;}
+	temp += "|";
+	const string FilledBlock = temp;
 
+	//create EmptyBlock
+	temp = "";
+	for (int i = 1;i < Subdivisions;i++) { temp += EmptyUnit;}
+	temp += "|";
+	const string EmptyBlock = temp;
+
+	
 	int TotalFilledBlocks; //Number of filled block for each row
 	int TotalEmptyBlocks; //Number of filled block for each row
 
-	//Choose a scale using multiples or sub-multiples of 1, 2, 5
-	string Scale = "\n"; 	//scale of probabilities
+	//Create a scale of probabilities 
+	string Scale = "\n\t";
+	const int NumberOfDP = 3; //Number of decimal places in numbers displayed on scale. DO NOT CHANGE.
 	int mode = int(p * long double(n + 1));
 	long double MaxProbability = P_x(n, p, mode); 
 	const long double BigGap = (MaxProbability / long double(TotalBlocks)); //gap size between blocks
 	const long double SmallGap = BigGap / Subdivisions; // gap size between subdivisions
-	for (long double i = 0;i < 11;i++) {
-		Scale += "\t" + to_string(BigGap * i).substr(0,5);
+	// "/t"  =  8 characters
+	// ONLY DISPLAY numbers every 2 intervals
+	for (int i = 0;i <= TotalBlocks; i++) {
+		if (i % 2 == 0) {
+			Scale += to_string(BigGap * long double(i)).substr(0, NumberOfDP + 2) + "\t\t";
+		}
 	}
 	Scale += "\n\n";
 
 	cout << "\t\t\t\t\t X ~ B (" << n << ", " << p << ")\n"; //header
 	cout << Scale;
 
+	string grid = "";
+	int FirstNonZeroX = -1;
+	int LastNonZeroX = -1;
 	for (int x = 0;x <= n;x++) {
 		string line = "x = " + to_string(x) + "\t |"; //line to be output
 		long double px = P_x(n, p, x); //P(X = x)
@@ -68,7 +92,7 @@ void BinomialVisualiser(const int n, const long double p) {//n>0, p>0
 		}
 		else {
 			//add remaining units
-			for (int j = 0;j < 7;j++) {
+			for (int j = 0;j < Subdivisions-1;j++) {
 				if (j < units) {line += Unit;}
 				else {line += EmptyUnit;}
 			}
@@ -76,33 +100,28 @@ void BinomialVisualiser(const int n, const long double p) {//n>0, p>0
 			TotalEmptyBlocks = TotalBlocks - TotalFilledBlocks - 1;
 		}
 		//add empty blocks
-		for (int i = 0;i < TotalEmptyBlocks;i++) { line += EmptyBlock;}
-		cout << line << "\n\n";
-	}
-	ProbabilityTable(n, p);
+		if (TotalEmptyBlocks != TotalBlocks) {
+			if (FirstNonZeroX == -1)FirstNonZeroX = x;
+			if (FirstNonZeroX != -1)LastNonZeroX = x;
 
-	//add E(x), mode, Variance
+			for (int i = 0;i < TotalEmptyBlocks;i++) { line += EmptyBlock; }
+			grid += line + "\n\n";
+		}
+	}
+	string FullLineOfEmptyBlocks = "";
+	for (int i = 0;i < TotalBlocks;i++) {FullLineOfEmptyBlocks += EmptyBlock;}
+
+	if (FirstNonZeroX != 0) {
+		grid = "x < " + to_string(FirstNonZeroX) + "\t |" + FullLineOfEmptyBlocks + "\n\n" + grid;
+	}
+	if (LastNonZeroX != n) {
+		grid += "x > " + to_string(LastNonZeroX) + "\t |" + FullLineOfEmptyBlocks + "\n\n";
+
+	}
+	cout << grid;
 }
 int main() {
-	//improve to support standard notation
-	//cout << P_x(10, 0.4, 0)<<"\n";
-	//cout << RoundUp(0.01);
-
-	BinomialVisualiser(10, 0.5);
-	system("pause");
-
-
-	////smallest interval = 0.125
-	cout << "\n\t0.0\t0.125\t0.250\t0.3\t0.4\t0.5\t0.6\t0.7\t0.8\t0.9\t1.0\n\n";
-	cout << "x = 0\t |@@@@@@@|.......|.......|.......|.......|.......|.......|.......|.......|.......|\n\n";
-	cout << "x = 1\t |@@@@@@@|@@@@@@@|@@@@...|.......|.......|.......|.......|.......|.......|.......|\n\n";
-	cout << "x = 2\t |@@@@@@@|@@@@@@@|@@@@@@@|@@@@@@@|.......|.......|.......|.......|.......|.......|\n\n";
-	cout << "x = 3\t |@@@@@@@|@@@@@@@|@@@@@@@|@@@@@@@|@@@@@@@|.......|.......|.......|.......|.......|\n\n";
-	cout << "x = 4\t |@@@@@@@|@@@@@@@|@@@@@@@|@@@@@@@|@@@@@@@|@@@@@@@|.......|.......|.......|.......|\n\n";
-	cout << "x = 5\t |@@@@@@@|@@@@@@@|@@@@@@@|@@@@@@@|@@@@@@@|.......|.......|.......|.......|.......|\n\n";
-	cout << "x = 6\t |@@@@@@@|@@@@@@@|@@@@@@@|@@@@@@@|.......|.......|.......|.......|.......|.......|\n\n";
-	cout << "x = 7\t |@@@@@@@|@@@@@@@|@@@@...|.......|.......|.......|.......|.......|.......|.......|\n\n";
-	cout << "x = 8\t |@@@@@@@|.......|.......|.......|.......|.......|.......|.......|.......|.......|\n\n";
+	BinomialVisualiser(100, 0.123);
 	system("pause");
 
 }
