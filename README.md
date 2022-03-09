@@ -3,11 +3,26 @@
 
 `X ~ B(n,p)` is drawn for any valid parameters `n`, `p`
 
-# Function call # 
+# How to use # 
+All the code required to run the program in `main.cpp`
 
+Call function as :
 ```cpp
-BinomialVisualiser(10,0.6)
+BinomialVisualiser(10,0.6);
 ```
+## Modifications ##
+The following parameters of the grid can be changed but is not recommended because of different possible sizes of your terminal.
+
+Default settings :
+```cpp
+TotalBlocks = 10
+Subdivisions = 8
+NumberOfDP = 3
+```
+## Changing the grid size ##
+
+TotalBlocks * Subdivisions < 100
+## Modifying scale ##
 
 # Future work #
 - [ ] Get rid of awkward scale (Choose only sensible scales which are multiples of 2, 5)
