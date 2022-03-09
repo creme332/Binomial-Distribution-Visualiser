@@ -15,9 +15,9 @@ The following parameters of the grid can be changed but is not recommended becau
 
 Default settings :
 ```cpp
-TotalBlocks = 10
-Subdivisions = 8
-NumberOfDP = 3
+TotalBlocks = 10; //controls grid width
+Subdivisions = 8; //controls grid width
+NumberOfDP = 3; //for scale
 ```
 ## Changing the grid size ##
 
