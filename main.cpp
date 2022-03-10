@@ -2,8 +2,6 @@
 #include <vector>
 #include <string>
 #include <cmath>
-#define ll long long
-
 using namespace std;
 
 long double P_x(const int n, const long double p, const int x) {
@@ -33,8 +31,8 @@ void ProbabilityTable(int n, long double p) {
 	}
 }
 void BinomialVisualiser(const int n, const long double p) {//n>0, p>0
-	const int TotalBlocks = 10; //number of blocks that can be displayed horizontally. Keep < 25.
-	const int Subdivisions = 8; // number of smaller interval within each block. Do not change. keep > 1
+	const int TotalBlocks = 10; //number of blocks that can be displayed horizontally. Keep even number < 25.
+	const int Subdivisions = 8; // number of smaller interval within each block. Do not change. keep > 1. block size
 	const string Unit = "@"; // a block consists of either a unit or an empty unit
 	const string EmptyUnit = ".";
 	
@@ -61,14 +59,19 @@ void BinomialVisualiser(const int n, const long double p) {//n>0, p>0
 	long double MaxProbability = P_x(n, p, mode); 
 	const long double BigGap = (MaxProbability / long double(TotalBlocks)); //gap size between blocks
 	const long double SmallGap = BigGap / Subdivisions; // gap size between subdivisions
-	// "/t"  =  8 characters
-	// ONLY DISPLAY numbers every 2 intervals
+
+	//Find the separation of numbers on scale
+	temp = "";
+	for (int i = 0;i < 2*(Subdivisions-NumberOfDP)+1;i++) {temp += " ";}
+	const string SpaceBetweenNumbers = temp; //separation of numbers on scale. DO NOT CHANGE
+
 	for (int i = 0;i <= TotalBlocks; i++) {
-		if (i % 2 == 0) {
-			Scale += to_string(BigGap * long double(i)).substr(0, NumberOfDP + 2) + "\t\t";
+		if (i % 2 == 0) { //display numbers on scale every 2 intervals
+			Scale += to_string(BigGap * long double(i)).substr(0, NumberOfDP + 2) + SpaceBetweenNumbers;
 		}
 	}
 	Scale += "\n\n";
+
 
 	cout << "\t\t\t\t\t X ~ B (" << n << ", " << p << ")\n"; //header
 	cout << Scale;
@@ -119,9 +122,17 @@ void BinomialVisualiser(const int n, const long double p) {//n>0, p>0
 
 	}
 	cout << grid;
+	cout << "\n";
+	cout << "Mean = " << n * p << endl;
+	cout << "Mode = " << mode << endl;
+	cout << "Variance = " << n*p*(1-p)<< endl;
 }
 int main() {
-	BinomialVisualiser(100, 0.123);
+	int n = 10;
+	long double p = 0.13;
+	BinomialVisualiser(n, p);
+	cout << "\n";
+	ProbabilityTable(n, p);
 	system("pause");
 
 }
