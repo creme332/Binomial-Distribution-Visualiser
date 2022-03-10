@@ -1,7 +1,12 @@
 # Binomial Distribution Visualiser
+
 ![image](https://user-images.githubusercontent.com/65414576/157391910-6fe68afd-8177-4030-9cd3-28b03a7e3824.png)
 
-`X ~ B(n,p)` is drawn for any valid parameters `n`, `p`
+![image](https://user-images.githubusercontent.com/65414576/157603181-c5ec6308-b09c-436b-923f-7b81f64f6ac7.png)
+<sup>*Here n = 1000 and p = 0.13* 
+
+
+`X ~ B(n,p)` is drawn for any valid parameters `n`, `p`. Other information such as the mean, mode, variance, and proabability distribution table can also be output.
 
 # How to use # 
 All the code required to run the program in `main.cpp`. It is recommended to put your terminal in full screen.
@@ -11,11 +16,11 @@ Call function as :
 BinomialVisualiser(n, p);
 ```
 
-For large values of `n`, you might have to scroll up/down a bit to view the distribution.
+For large values of `n`, you might have to scroll up/down the terminal to view the full distribution.
 # Modifications #
 Several parameters of the diagram can be changed but is not recommended because of different possible sizes of the terminal.
 
-The default settings should work on all terminal which are in full screen.
+The default settings should work on all terminals which are in full screen.
 
 Default settings :
 ```cpp
@@ -24,25 +29,20 @@ Subdivisions = 8; //controls grid width
 NumberOfDP = 3; //for scale
 ```
 ## Changing the grid size ##
-Increasing `TotalBlocks` and `Subdivisions` will increase the accuracy of the plotting while increasing the size of the diagram horizontally.
+Increasing `TotalBlocks` and `Subdivisions` will increase the accuracy of the plotting but also increases the size of the diagram horizontally.
 
-Obey the following rules :
+As a rule of thumb to avoid invalid diagrams, try to satisfy the following conditions  :
 
 - `TotalBlocks * Subdivisions < 100` (so that there is no "merging" of rows)
 - `TotalBlocks > 5`
 - `Subdivisions > 0`
 
 ## Modifying scale ##
-`NumberOfDP` determines the number of decimal places in the numbers displayed on the scale.
-As a general rule of thumb, ensure that `2 < NumberOfDP < 5` so that there is no "merging" of numbers. 
+`NumberOfDP` determines the number of decimal places in the numbers displayed on the scale. 
+Condition that must always be satisfied : `Subdivisions > NumberOfDP`
 # Future work #
-- [ ] Get rid of awkward scale (Choose only sensible scales which are multiples of 2, 5)
 - [ ] Ensure that it works on an online compiler.
-- [x] Do not hard code FilledBlock, EmptyBlock
 - [ ] Color the graph
-- [x] Deal with large values of n (Do not plot all values of x)
-- [ ] output E(X), Var(X), mode
-
 # Inspiration #
 https://homepage.divms.uiowa.edu/~mbognar/applets/bin.html
 
