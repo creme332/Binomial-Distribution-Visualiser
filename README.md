@@ -4,7 +4,7 @@
 `X ~ B(n,p)` is drawn for any valid parameters `n`, `p`
 
 # How to use # 
-All the code required to run the program in `main.cpp`
+All the code required to run the program in `main.cpp`. It is recommended to put your terminal in full screen.
 
 Call function as :
 ```cpp
@@ -15,7 +15,7 @@ For large values of `n`, you might have to scroll up/down a bit to view the dist
 # Modifications #
 Several parameters of the diagram can be changed but is not recommended because of different possible sizes of the terminal.
 
-The default settings should work on all terminal screens which have been maximised.
+The default settings should work on all terminal which are in full screen.
 
 Default settings :
 ```cpp
