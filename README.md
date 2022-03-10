@@ -9,7 +9,7 @@
 `X ~ B(n,p)` is drawn for any valid parameters `n`, `p`. Other information such as the mean, mode, variance, and proabability distribution table can also be output.
 
 # How to use # 
-All the code required to run the program in `main.cpp`. It is recommended to put your terminal in full screen.
+All the code required to run the program in `main.cpp`. It is recommended to put your terminal in full screen. If you are using an [online compiler](https://www.onlinegdb.com/online_c++_compiler) use the code from `OnlineCompilerVersion` file.
 
 Call function as :
 ```cpp
