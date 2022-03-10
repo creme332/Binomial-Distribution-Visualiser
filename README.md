@@ -37,7 +37,7 @@ As a rule of thumb to avoid invalid diagrams, try to satisfy the following condi
 - `TotalBlocks > 5`
 - `Subdivisions > 0`
 
-## Modifying scale ##
+## Changing scale ##
 `NumberOfDP` determines the number of decimal places in the numbers displayed on the scale. 
 Condition that must always be satisfied : `Subdivisions > NumberOfDP`
 # Future work #
