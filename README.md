@@ -7,7 +7,7 @@
 
 
 `X ~ B(n,p)` is drawn for any valid parameters `n`, `p`. Other information such as the mean, mode, variance, and proabability distribution table can also be output.
-
+  
 # How to use # 
 All the code required to run the program in `main.cpp`. It is recommended to put your terminal in full screen. If you are using an [online compiler](https://www.onlinegdb.com/online_c++_compiler) use the code from `OnlineCompilerVersion` file.
 
@@ -41,7 +41,6 @@ As a rule of thumb to avoid invalid diagrams, try to satisfy the following condi
 `NumberOfDP` determines the number of decimal places in the numbers displayed on the scale. 
 Condition that must always be satisfied : `Subdivisions > NumberOfDP`
 # Future work #
-- [ ] Ensure that it works on an online compiler.
 - [ ] Color the graph
 # Inspiration #
 https://homepage.divms.uiowa.edu/~mbognar/applets/bin.html
