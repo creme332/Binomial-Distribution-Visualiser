@@ -40,8 +40,7 @@ As a rule of thumb to avoid invalid diagrams, try to satisfy the following condi
 ## Changing scale ##
 `NumberOfDP` determines the number of decimal places in the numbers displayed on the scale. 
 Condition that must always be satisfied : `Subdivisions > NumberOfDP`
-# Future work #
-- [ ] Color the graph
+
 # Inspiration #
 https://homepage.divms.uiowa.edu/~mbognar/applets/bin.html
 
