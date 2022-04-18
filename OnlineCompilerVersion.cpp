@@ -2,9 +2,11 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <cassert>
 using namespace std;
 
 long double P_x(const int n, const long double p, const int x) {
+        assert(n>0&&p>=0&& p<=1 && x>=0);
 	//returns P(X=x) = nCx (p)^x (1-p)^(1-x)
 	if (x == 0)return pow(1 - p, n);
 	int k=x;
@@ -22,6 +24,7 @@ long double P_x(const int n, const long double p, const int x) {
 	return nCx * pow(p, x) * pow(1 - p, n - x);
 }
 void ProbabilityTable(int n, long double p) {
+    assert(n>0&&p>=0&& p<=1);
 	cout << "x\t P(X=x)\n";
 	for (int x = 0;x <= n;x++) {
 		string line = to_string(x) + "\t"; //line to be output
@@ -30,7 +33,9 @@ void ProbabilityTable(int n, long double p) {
 		cout << line << "\n";
 	}
 }
-void BinomialVisualiser(const int n, const long double p) {//n>0, p>0
+void BinomialVisualiser(const int n, const long double p) {
+    assert(n>0&&p>=0&& p<=1);
+    
 	const int TotalBlocks = 15; //number of blocks that can be displayed horizontally. Keep even number < 25.
 	const int Subdivisions = 5; // number of smaller interval within each block. Do not change. keep > 1. block size
 	const string Unit = "@"; // a block consists of either a unit or an empty unit
@@ -129,7 +134,7 @@ void BinomialVisualiser(const int n, const long double p) {//n>0, p>0
 }
 int main() {
     int n =10;
-    long double p =0.13;
+    long double p =0.5;
 	BinomialVisualiser(n, p);
 	cout<<"\n";
 	ProbabilityTable(n, p);
