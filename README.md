@@ -72,7 +72,7 @@ Default settings :
 ```cpp
 TotalBlocks = 10; //controls grid width
 Subdivisions = 8; //controls grid width
-NumberOfDP = 3; //for scale
+NumberOfDP = 3; //controls the number of decimal places for numbers on scale
 ```
 ## Changing the grid size ##
 Increasing `TotalBlocks` and `Subdivisions` will increase the accuracy of the plotting but also increases the size of the diagram horizontally.
