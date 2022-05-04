@@ -54,7 +54,7 @@ x	 P(X=x)
 
 `X ~ B(n,p)` is drawn for any valid parameters `n`, `p`. Other information such as the mean, mode, variance, and proabability distribution table can also be output.
   
-# How to use # 
+# 🚀 Setup # 
 All the code required to run the program in `main.cpp`. It is recommended to put your terminal in full screen. If you are using an [online compiler](https://www.onlinegdb.com/online_c++_compiler) use the code from `OnlineCompilerVersion` file.
 
 Call function as :
@@ -63,7 +63,7 @@ BinomialVisualiser(n, p);
 ```
 
 For large values of `n`, you might have to scroll up/down the terminal to view the full distribution.
-# Modifications #
+# 🔨 Modifications #
 Several parameters of the diagram can be changed but is not recommended because of different possible sizes of the terminal.
 
 The default settings should work on all terminals which are in full screen.
@@ -87,7 +87,7 @@ As a rule of thumb to avoid invalid diagrams, try to satisfy the following condi
 `NumberOfDP` determines the number of decimal places in the numbers displayed on the scale. 
 Condition that must always be satisfied : `Subdivisions > NumberOfDP`
 
-# Inspiration #
+# 🌠Inspiration #
 https://homepage.divms.uiowa.edu/~mbognar/applets/bin.html
 
 https://shiny.rit.albany.edu/stat/binomial/
