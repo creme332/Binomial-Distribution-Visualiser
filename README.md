@@ -1,4 +1,4 @@
-# Binomial Distribution Visualiser
+# 📊Binomial Distribution Visualiser
 
 ![image](https://user-images.githubusercontent.com/65414576/157391910-6fe68afd-8177-4030-9cd3-28b03a7e3824.png)
 
