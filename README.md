@@ -1,6 +1,6 @@
 # 📊Binomial Distribution Visualiser
 
-![image](https://user-images.githubusercontent.com/65414576/157391910-6fe68afd-8177-4030-9cd3-28b03a7e3824.png)
+An ASCII visualizer for the probability mass function of a binomial distribution. $X\sim B(n,p)$ is drawn for any valid parameters $n$, $p$. Other information such as the mean, mode, variance, and proabability distribution table can also be displayed.
 
 ```
 					 X ~ B (10, 0.5)
@@ -47,14 +47,11 @@ x	 P(X=x)
 9	0.009766
 10	0.000977
 ```
+<sup>When n = 1000 and p = 0.13: </sup>
 
 ![image](https://user-images.githubusercontent.com/65414576/157603181-c5ec6308-b09c-436b-923f-7b81f64f6ac7.png)
-<sup>*Here n = 1000 and p = 0.13* 
-
-
-$X\sim B(n,p)$ is drawn for any valid parameters $n$, $p$. Other information such as the mean, mode, variance, and proabability distribution table can also be output.
   
-# 🚀 Setup # 
+## 🚀 Setup
 All the code required to run the program in `main.cpp`. It is recommended to put your terminal in full screen. If you are using an [online compiler](https://www.onlinegdb.com/online_c++_compiler) use the code from `OnlineCompilerVersion` file.
 
 Call function as :
@@ -63,18 +60,17 @@ BinomialVisualiser(n, p);
 ```
 
 For large values of $n$, you might have to scroll up/down the terminal to view the full distribution.
-# 🔨 Modifications #
-Several parameters of the diagram can be changed but is not recommended because of different possible sizes of the terminal.
 
-The default settings should work on all terminals which are in full screen.
+## 🔨 Modifications
+Several parameters of the diagram can tweaked but is not recommended to do so because of different possible sizes of the terminal.
 
-Default settings :
+The default settings should work on all terminals which are in full screen:
 ```cpp
 TotalBlocks = 10; //controls grid width
 Subdivisions = 8; //controls grid width
 NumberOfDP = 3; //controls the number of decimal places for numbers on scale
 ```
-## Changing the grid size ##
+### Changing the grid size
 Increasing `TotalBlocks` and `Subdivisions` will increase the accuracy of the plotting but also increases the size of the diagram horizontally.
 
 As a rule of thumb to avoid invalid diagrams, try to satisfy the following conditions  :
@@ -83,11 +79,11 @@ As a rule of thumb to avoid invalid diagrams, try to satisfy the following condi
 - `TotalBlocks > 5`
 - `Subdivisions > 0`
 
-## Changing scale ##
+### Changing scale
 `NumberOfDP` determines the number of decimal places in the numbers displayed on the scale. 
 Condition that must always be satisfied : `Subdivisions > NumberOfDP`
 
-# 🌠Inspiration #
+## 🌠Inspiration 
 https://homepage.divms.uiowa.edu/~mbognar/applets/bin.html
 
 https://shiny.rit.albany.edu/stat/binomial/
